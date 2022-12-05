@@ -1,7 +1,9 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-import { loadFixture } from "@nomicfoundation/hardhat-network-helpers"
+import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
+
+
 
 describe("LabaToken", function () {
 
@@ -25,7 +27,7 @@ describe("LabaToken", function () {
 
       const { labaToken, owner } = await loadFixture(deployTokenFixture);
 
-      expect(await labaToken.owner).to.equal(owner.address);
+      expect(await labaToken.owner()).to.equal(owner.address);
       
     });
 
@@ -41,7 +43,6 @@ describe("LabaToken", function () {
 
       const { labaToken, owner, initialSupply} = await loadFixture(deployTokenFixture);
   
-      const supply = await labaToken.balanceOf(owner.address);
       expect(await labaToken.totalSupply()).to.equal(initialSupply);
     });
 

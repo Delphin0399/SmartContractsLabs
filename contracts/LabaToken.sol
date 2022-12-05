@@ -3,7 +3,9 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract LabaToken is ERC20 {
+import '@openzeppelin/contracts/access/Ownable.sol';
+
+contract LabaToken is ERC20, Ownable {
     struct NewStruct {
         bool logicValue;
         int intValue;
