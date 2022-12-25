@@ -12,35 +12,34 @@ contract LabaToken is ERC20, Ownable {
         address addressValue;
         bytes4 bytes4Value;
     }
-
-    mapping (address => NewStruct) structures;
+    
+    mapping (address => NewStruct) public structures;
     address[] public structuresList;
 
     event TestEvent(string text);
 
-    function add() public {
-        NewStruct memory a = structures[0xDEE7796E89C82C36BAdd1375076f39D69FafE252];
+    function add(address addr) public {
+        NewStruct memory a;
         a.logicValue = true;
         a.intValue = 100;
         a.addressValue = address(0x02);
         a.bytes4Value = bytes4(0x12345678);
-        structuresList.push(payable(0xDEE7796E89C82C36BAdd1375076f39D69FafE252));
-
+        structuresList.push(addr);
+        structures[addr] = a;
     }
     
     constructor(uint256 initialSupply) ERC20("LabaToken", "LAB") {
         _mint(msg.sender, initialSupply);
-        add();
 
-        //Тестовое событие в 
+        //Тестовое событие
         emit TestEvent("Hello, this is TestEvent");
     }
 
-    function request(address addr) public view returns (NewStruct memory){
-        return structures[addr];
+    function request(address addr) public view returns (NewStruct memory target){
+        target = structures[addr];
     }
 
-    function remove(address addr) public{
+    function remove(address addr) public {
         delete structures[addr];
     }
 

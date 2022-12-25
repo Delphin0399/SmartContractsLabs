@@ -2,6 +2,8 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
+import { Address } from "@nomicfoundation/ethereumjs-util";
+
 
 
 
@@ -45,6 +47,38 @@ describe("LabaToken", function () {
   
       expect(await labaToken.totalSupply()).to.equal(initialSupply);
     });
+
+  });
+
+  describe("Custom Fucntions", function (){
+
+    
+    
+    it("Запрос структуры по ключу, проверка значения", async function () {
+
+      const { labaToken, owner } = await loadFixture(deployTokenFixture);
+
+      await labaToken.add(owner.address);
+      
+      expect(await (await labaToken.request(owner.address)).intValue).to.equal(100);
+      
+    });
+
+    it("Удаление структуры", async function () {
+
+      const { labaToken, owner } = await loadFixture(deployTokenFixture);
+
+      await labaToken.add(owner.address);
+
+      await labaToken.remove(owner.address);
+
+      //console.warn(await labaToken.request(owner.address));
+
+      expect(await (await labaToken.request(owner.address)).intValue).to.equal(0);
+      
+    });
+
+
 
   });
     
