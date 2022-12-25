@@ -1,6 +1,6 @@
 Репозиторий лабораторной по смарт-контрактам
 
-![plot](./passed_test)
+![img](./testRes.png)
 
 
 26.12.22 Updated Personal Acces Token
